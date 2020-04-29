@@ -1,0 +1,18 @@
+digraph graphname {
+
+   // Steps
+   fetch_data      [label="Fetch Data"      pre=""                           post="fetch_data"]
+   fetch_snapshots [label="Fetch Snapshots" pre=""                           post="fetch_snapshots"]
+   encrypt         [label="Encrypt"         pre="fetch_data,fetch_snapshots" post="encrypt"]
+   compress        [label="Compress"        pre="encrypt"                    post="compress"]
+   upload          [label="Upload"          pre="compress"                   post="upload"]
+   clean           [label="Clean"           pre="upload"                     post="clean"]
+
+   // Edges
+   fetch_data -> encrypt [label="test"]
+   fetch_snapshots -> encrypt
+   encrypt -> compress
+   compress -> upload
+   upload -> clean
+
+ }

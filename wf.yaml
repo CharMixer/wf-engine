@@ -3,69 +3,69 @@ steps:
   -
     id: fetch_vm_snapshots
     name: "Fetch VM snapshots"
+    pre_events: []
     post_events:
       - fetch_vm_snapshots
-    pre_events: []
   -
     id: fetch_data
     name: "Fetch data"
+    pre_events: []
     post_events:
       - fetch_data
-    pre_events: []
   -
     id: encrypt
     name: Encrypt
-    post_events:
-      - encrypt
     pre_events:
       - fetch_vm_snapshots
       - fetch_data
+    post_events:
+      - encrypt
   -
     id: compress
     name: Compress
-    post_events:
-      - compress
     pre_events:
       - encrypt
+    post_events:
+      - compress
   -
     id: upload
     name: Upload
-    post_events:
-      - upload
     pre_events:
       - compress
+    post_events:
+      - upload
   -
     id: clean
     name: Clean
-    post_events:
-      - fetch_data
     pre_events: []
-  -
-    id: encrypt
-    name: Encrypt
-    post_events:
-      - encrypt
-    pre_events:
-      - fetch_vm_snapshots
-      - fetch_data
-  -
-    id: compress
-    name: Compress
-    post_events:
-      - compress
-    pre_events:
-      - encrypt
-  -
-    id: upload
-    name: Upload
-    post_events:
-      - upload
-    pre_events:
-      - compress
-  -
-    id: clean
-    name: Clean
     post_events:
       - clean
+  -
+    id: encrypt
+    name: Encrypt
+    pre_events:
+      - fetch_vm_snapshots
+      - fetch_data
+    post_events:
+      - encrypt
+  -
+    id: compress
+    name: Compress
+    pre_events:
+      - encrypt
+    post_events:
+      - compress
+  -
+    id: upload
+    name: Upload
+    pre_events:
+      - compress
+    post_events:
+      - upload
+  -
+    id: clean
+    name: Clean
     pre_events:
       - upload
+    post_events:
+      - clean
